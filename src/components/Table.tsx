@@ -1,6 +1,7 @@
 
 
 import { useAppDispatch, useAppSelector } from "../store/hook"
+import { deleteUser } from "../store/slice/userSlice";
 import ActionBtn from "./ActionBtn"
 
 
@@ -9,6 +10,11 @@ const tableHeadData: string[] = ['Name', "Email", "Role", "Action"]
 
 const Table = () => {
     const { filteredUsersData, isLoading } = useAppSelector((state) => state.users);
+    const dispatch = useAppDispatch()
+
+    const deleteUserBtnHandler = (userId: number) => {
+        dispatch(deleteUser(userId))
+    }
 
 
     return (
@@ -34,7 +40,7 @@ const Table = () => {
                             <td className="p-4" >{ele.email}</td>
                             <td className="p-4" >{ele.role}</td>
                             <td className="p-4" >
-                                <ActionBtn />
+                                <ActionBtn deleteBtnHandler={deleteUserBtnHandler} userId={ele.id} />
                             </td>
                         </tr>)
                     }

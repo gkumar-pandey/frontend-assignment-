@@ -1,7 +1,7 @@
-import { ReactEventHandler, SetStateAction, useState, KeyboardEvent } from "react";
+import { ReactEventHandler, useState, KeyboardEvent } from "react";
 import { MdOutlineDelete } from "react-icons/md";
 import { ImSearch } from "react-icons/im";
-import { useAppDispatch, useAppSelector } from "../store/hook";
+import { useAppDispatch } from "../store/hook";
 import { search } from "../store/slice/userSlice";
 
 const Search = () => {

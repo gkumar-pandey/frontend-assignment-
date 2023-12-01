@@ -1,14 +1,22 @@
-
+import { FC } from "react";
 import { LiaEditSolid } from "react-icons/lia";
 import { MdDeleteOutline } from "react-icons/md";
 
-const ActionBtn = () => {
+interface ActionBtnProps {
+    deleteBtnHandler: (userId: number) => void;
+    userId: number;
+}
+
+const ActionBtn: FC<ActionBtnProps> = ({ deleteBtnHandler, userId }) => {
     return (
-        <div className=" gap-2 flex  " >
-            <button className="p-1 border border-gray-700 rounded-md text-xl " >
+        <div className=" flex gap-2  ">
+            <button className="rounded-md border border-gray-700 p-1 text-xl ">
                 <LiaEditSolid />
             </button>
-            <button className="p-1 border border-gray-700 rounded-md text-xl text-red-700 " >
+            <button
+                className="rounded-md border border-gray-700 p-1 text-xl text-red-700 "
+                onClick={() => deleteBtnHandler(userId)}
+            >
                 <MdDeleteOutline />
             </button>
         </div>

@@ -43,6 +43,16 @@ export const usersSlice = createSlice({
         ),
       };
     },
+    deleteUser: (state, action) => {
+      const updatedData = state.data.filter(
+        (user) => user.id !== action.payload,
+      );
+      return {
+        ...state,
+        data: updatedData,
+        filteredUsersData: updatedData,
+      };
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(
@@ -70,7 +80,7 @@ export const usersSlice = createSlice({
   },
 });
 
-export const { search } = usersSlice.actions;
+export const { search, deleteUser } = usersSlice.actions;
 
 // // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value;
