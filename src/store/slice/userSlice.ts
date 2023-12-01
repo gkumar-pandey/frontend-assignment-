@@ -10,13 +10,15 @@ interface UserData {
 }
 
 interface InitialState {
-  users: UserData[];
+  data: UserData[];
+  filteredUsersData: UserData[];
   isLoading: boolean;
   error: null | any;
 }
 
 const initialState: InitialState = {
-  users: [],
+  data: [],
+  filteredUsersData: [],
   isLoading: false,
   error: null,
 };
@@ -32,7 +34,16 @@ export const fetchUserData = createAsyncThunk("user", async () => {
 export const usersSlice = createSlice({
   name: "users",
   initialState,
-  reducers: {},
+  reducers: {
+    search: (state, action) => {
+      return {
+        ...state,
+        filteredUsersData: state.data.filter((user) =>
+          user.name.toLocaleLowerCase().includes(action.payload.toLowerCase()),
+        ),
+      };
+    },
+  },
   extraReducers: (builder) => {
     builder.addCase(
       fetchUserData.pending,
@@ -44,21 +55,22 @@ export const usersSlice = createSlice({
       fetchUserData.fulfilled,
       (state, action: PayloadAction<any>) => {
         state.isLoading = false;
-        state.users = action.payload;
+        state.data = action.payload;
+        state.filteredUsersData = action.payload;
       },
     );
     builder.addCase(
       fetchUserData.rejected,
       (state, action: PayloadAction<any>) => {
         state.isLoading = false;
-        state.users = [];
+        state.data = [];
         state.error = action.payload;
       },
     );
   },
 });
 
-// export const {} = usersSlice.actions;
+export const { search } = usersSlice.actions;
 
 // // Other code such as selectors can use the imported `RootState` type
 // export const selectCount = (state: RootState) => state.counter.value;

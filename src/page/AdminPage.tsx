@@ -15,7 +15,7 @@ const AdminPage = () => {
     }, [])
 
 
-    console.log(users)
+
     return (
         <Container>
             <div>
