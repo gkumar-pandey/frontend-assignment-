@@ -17,3 +17,10 @@
 - Implement pagination
 - Delete and edit row data
 - all select or individual select for delete feature implemented
+
+## Tech Used
+
+- ReactJs
+- Tailwind
+- React icons
+- Redux toolkit
